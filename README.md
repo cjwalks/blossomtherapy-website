@@ -21,7 +21,7 @@ A static site hosted on Netlify. Every push to `main` deploys automatically.
 - Size: anything up to 2–3 MB is fine. Landscape for services, square or portrait for team photos.
 
 ### Before GoDaddy is cancelled
-Until a file is uploaded here, the site loads it from GoDaddy's servers, and those links die when GoDaddy is cancelled. Upload all 21 images and 5 PDFs from `tools/assets.py` first. PDFs go in `site/assets/files/` with the names listed there.
+Until a file is uploaded here, the site loads it from GoDaddy's servers, and those links die when GoDaddy is cancelled. Upload every image and the 5 PDFs listed in `tools/assets.py` first (gallery photos go in as gallery-01.png to gallery-11.png). PDFs go in `site/assets/files/` with the names listed there.
 
 ## Markers in the HTML
 - `HALAXY EMBED`: paste the Halaxy form embed code (5 spots)

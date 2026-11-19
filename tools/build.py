@@ -8,7 +8,7 @@ physiotherapy (Caite Brown) added. Markers in the HTML:
 """
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from assets import GODADDY, FILES
+from assets import GODADDY, FILES, REMOTE, GALLERY
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "site")
@@ -32,7 +32,7 @@ def img(name, w=1200):
     """Local copy if uploaded to site/assets/img, else the old GoDaddy CDN."""
     if os.path.exists(os.path.join(OUT, "assets", "img", name)):
         return f"/assets/img/{name}"
-    return f"{GODADDY}{name}/:/rs=w:{w},cg:true,m"
+    return f"{GODADDY}{REMOTE.get(name, name)}/:/rs=w:{w},cg:true,m"
 
 
 def file_url(name):
@@ -167,6 +167,8 @@ PICKER = f"""<section class="sec white" id="get-started" aria-labelledby="gs-h">
 </section>"""
 
 # ---------------- Home ----------------
+GALLERY_HTML = "\n      ".join(f'<img src="{img(g, 800)}" alt="A Blossom moment" loading="lazy">' for g in GALLERY)
+
 home = f"""
 <section class="hero">
   <div class="wrap">
@@ -236,11 +238,7 @@ home = f"""
   <div class="wrap">
     <h2>Some of our favourite moments...</h2>
     <div class="gallery">
-      <img src="{img('IMG_8512.jpeg', 800)}" alt="Blossom moment" loading="lazy">
-      <img src="{img('IMG_8857.jpeg', 800)}" alt="Blossom moment" loading="lazy">
-      <img src="{img('AFam.png', 800)}" alt="Blossom moment" loading="lazy">
-      <img src="{img('IMG_8715.jpeg', 800)}" alt="Blossom moment" loading="lazy">
-      <img src="{img('IMG_8900.jpeg', 800)}" alt="Blossom moment" loading="lazy">
+      {GALLERY_HTML}
     </div>
     <!-- TODO: better alt text describing each photo -->
   </div>
