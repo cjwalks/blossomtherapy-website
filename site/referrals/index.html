@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Client Referral Form | Blossom Therapy</title>
-<meta name="description" content="Refer a client to Blossom Therapy & Supports for exercise physiology, physiotherapy, disability support or social groups.">
+<meta name="description" content="Refer a client to Blossom Therapy & Supports for exercise physiology, physiotherapy or disability support.">
 <meta name="theme-color" content="#DCFADC">
 <link rel="canonical" href="https://blossomtherapyandsupport.com.au/referrals/">
 <meta property="og:title" content="Client Referral Form | Blossom Therapy">
-<meta property="og:description" content="Refer a client to Blossom Therapy & Supports for exercise physiology, physiotherapy, disability support or social groups.">
+<meta property="og:description" content="Refer a client to Blossom Therapy & Supports for exercise physiology, physiotherapy or disability support.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://blossomtherapyandsupport.com.au/referrals/">
 <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/fc922215-55f7-48fb-bc5a-a0bc6ec97e0e/IMG_8906.jpeg/:/rs=w:1200,cg:true,m">
@@ -45,22 +45,37 @@
   <div class="wrap split" style="align-items:start">
     <div>
       <h2>Refer a client</h2>
-      <div class="halaxy-slot" data-halaxy-form="Referrer form">
-        <!-- HALAXY EMBED: paste the professional-contact (referrer) form embed code here, then delete the fallback below. -->
-        <p class="tag">Online referral coming soon</p>
-        <p>For now, please complete the referral form and email it to <a href="mailto:hello@blossomtherapy.au">hello@blossomtherapy.au</a>.</p>
-        <div class="btn-row">
-          <a class="btn" href="https://img1.wsimg.com/blobby/go/fc922215-55f7-48fb-bc5a-a0bc6ec97e0e/Client%20referral%20form.pdf">Download PDF</a>
-          <a class="btn outline" href="mailto:hello@blossomtherapy.au?subject=New%20referral">Email a referral</a>
-        </div>
-      </div>
+      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
+      <form class="enquiry" name="referral" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website" enctype="multipart/form-data">
+  <input type="hidden" name="form-name" value="referral">
+  <input type="hidden" name="subject" value="New referral">
+  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
+  <div class="fields">
+    <div class="field"><label for="referral-referrer-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="referral-referrer-name" name="referrer-name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="referral-referrer-role">Role and practice <span class="req" aria-hidden="true">*</span></label><span class="hint" id="referral-referrer-role-hint">For example: GP, Smith Street Medical.</span><input id="referral-referrer-role" name="referrer-role" type="text" required aria-describedby="referral-referrer-role-hint"></div>
+    <div class="field"><label for="referral-referrer-phone">Your phone</label><input id="referral-referrer-phone" name="referrer-phone" type="tel" autocomplete="tel"></div>
+    <div class="field"><label for="referral-referrer-email">Your email <span class="req" aria-hidden="true">*</span></label><input id="referral-referrer-email" name="referrer-email" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="referral-client-name">Client's full name <span class="req" aria-hidden="true">*</span></label><input id="referral-client-name" name="client-name" type="text" required></div>
+    <div class="field"><label for="referral-client-dob">Client's date of birth</label><input id="referral-client-dob" name="client-dob" type="date"></div>
+    <div class="field"><label for="referral-client-phone">Client's (or carer's) phone <span class="req" aria-hidden="true">*</span></label><input id="referral-client-phone" name="client-phone" type="tel" required></div>
+    <div class="field"><label for="referral-suburb">Client's suburb <span class="req" aria-hidden="true">*</span></label><input id="referral-suburb" name="suburb" type="text" required></div>
+    <div class="field"><label for="referral-service">Service <span class="req" aria-hidden="true">*</span></label><select id="referral-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
+    <div class="field"><label for="referral-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="referral-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
+    <div class="field full"><label for="referral-letter">Referral letter (optional)</label><span class="hint" id="referral-letter-hint">PDF or image, up to 8 MB. You can also email it to hello@blossomtherapy.au.</span><input id="referral-letter" name="referral-letter" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" aria-describedby="referral-letter-hint"></div>
+    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> The client (or their carer) has agreed to this referral. <span class="req" aria-hidden="true">*</span></label></div>
+  </div>
+  <p class="fine form-note">We'll contact your client directly. Clinical details are best included in the referral letter. See our <a href="/privacy/">privacy policy</a>.</p>
+  <button class="btn" type="submit">Send referral</button>
+</form>
+      <p class="fine" style="margin-top:14px">Prefer paper? <a href="https://img1.wsimg.com/blobby/go/fc922215-55f7-48fb-bc5a-a0bc6ec97e0e/Client%20referral%20form.pdf">Download the referral form (PDF)</a> and email it to <a href="mailto:hello@blossomtherapy.au">hello@blossomtherapy.au</a>.</p>
     </div>
     <div class="card" style="background:var(--peach)">
       <h3 style="color:var(--orange)">Please include</h3>
       <ul class="tick">
         <li>Client name, date of birth and phone number</li>
         <li>Reason for referral and relevant history</li>
-        <li>Service: exercise physiology, physiotherapy, support work or social groups</li>
+        <li>Service: exercise physiology, physiotherapy or support work</li>
         <li>Funding: NDIS, Medicare CDM or private</li>
         <li>Your name, practice and contact details</li>
       </ul>

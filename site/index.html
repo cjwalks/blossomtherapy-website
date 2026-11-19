@@ -117,39 +117,83 @@
     <div class="panel" role="tabpanel" id="panel-client" aria-labelledby="tab-client">
       <h3>Tell us about you</h3>
       <p>One short form that you can fill in on your phone.</p>
-      <div class="halaxy-slot" data-halaxy-form="Client intake">
-  <!-- HALAXY EMBED: paste the "Client intake" embed code here (Halaxy > Settings > General > Forms > ⋮ > Share settings > Embedded Form > Copy).
-       Then delete the fallback content below. -->
-  <p class="tag">Online form coming soon</p>
-  <p>Until our online form is ready, email us with:</p>
-  <ul><li>Your name and phone number</li><li>The service you're interested in (exercise physiology, physiotherapy, support work or social groups)</li><li>Home visit or telehealth, and your suburb</li><li>Funding (NDIS, private or other)</li><li>Days and times that suit you</li></ul>
-  <a class="btn" href="mailto:hello@blossomtherapy.au?subject=New%20client%20enquiry">Email us</a>
-</div>
+      <!-- HALAXY EMBED (later): the Halaxy client intake form can replace this form -->
+      <form class="enquiry" name="client-enquiry" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website">
+  <input type="hidden" name="form-name" value="client-enquiry">
+  <input type="hidden" name="subject" value="New client enquiry">
+  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
+  <div class="fields">
+    <div class="field"><label for="client-enquiry-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-name" name="name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="client-enquiry-phone">Phone <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-phone" name="phone" type="tel" autocomplete="tel" required></div>
+    <div class="field"><label for="client-enquiry-email">Email <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-email" name="email" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="client-enquiry-suburb">Suburb <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-suburb" name="suburb" type="text" autocomplete="address-level2" required></div>
+    <div class="field"><label for="client-enquiry-service">Service you're interested in <span class="req" aria-hidden="true">*</span></label><select id="client-enquiry-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
+    <div class="field"><label for="client-enquiry-delivery">Home visit or telehealth? <span class="req" aria-hidden="true">*</span></label><select id="client-enquiry-delivery" name="delivery" required><option value="">Choose one</option><option>Home visit</option><option>Telehealth</option><option>Either</option></select></div>
+    <div class="field"><label for="client-enquiry-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="client-enquiry-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
+    <fieldset class="field full"><legend>Times that usually suit you</legend><div class="checks"><label class="check"><input type="checkbox" name="times[]" value="Weekday mornings"> Weekday mornings</label><label class="check"><input type="checkbox" name="times[]" value="Weekday afternoons"> Weekday afternoons</label><label class="check"><input type="checkbox" name="times[]" value="After school"> After school</label><label class="check"><input type="checkbox" name="times[]" value="Saturdays"> Saturdays</label></div></fieldset>
+    <div class="field full"><label for="client-enquiry-preferences">Anything that would make first contact easier?</label><span class="hint" id="client-enquiry-preferences-hint">For example: text before calling, best time to call, or communication preferences.</span><textarea id="client-enquiry-preferences" name="preferences" rows="4" aria-describedby="client-enquiry-preferences-hint"></textarea></div>
+    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> I agree to Blossom contacting me about this enquiry. <span class="req" aria-hidden="true">*</span></label></div>
+  </div>
+  <p class="fine form-note">Please don't include medical details here. We'll talk about those with you directly. See our <a href="/privacy/">privacy policy</a>.</p>
+  <button class="btn" type="submit">Send enquiry</button>
+</form>
     </div>
     <div class="panel" role="tabpanel" id="panel-carer" aria-labelledby="tab-carer" hidden>
       <h3>Tell us about the person you support</h3>
       <p>Your details, their details, and what support would help.</p>
-      <div class="halaxy-slot" data-halaxy-form="Carer intake">
-  <!-- HALAXY EMBED: paste the "Carer intake" embed code here (Halaxy > Settings > General > Forms > ⋮ > Share settings > Embedded Form > Copy).
-       Then delete the fallback content below. -->
-  <p class="tag">Online form coming soon</p>
-  <p>Until our online form is ready, email us with:</p>
-  <ul><li>Your name, phone number and relationship to the client</li><li>The client's name and age</li><li>The service you're interested in</li><li>Home visit or telehealth, and suburb</li><li>Funding (NDIS, private or other)</li><li>Days and times that suit</li></ul>
-  <a class="btn" href="mailto:hello@blossomtherapy.au?subject=Parent%20or%20carer%20enquiry">Email us</a>
-</div>
+      <!-- HALAXY EMBED (later): the Halaxy carer intake form can replace this form -->
+      <form class="enquiry" name="carer-enquiry" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website">
+  <input type="hidden" name="form-name" value="carer-enquiry">
+  <input type="hidden" name="subject" value="New parent or carer enquiry">
+  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
+  <div class="fields">
+    <div class="field"><label for="carer-enquiry-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-name" name="name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="carer-enquiry-relationship">Your relationship to the client <span class="req" aria-hidden="true">*</span></label><span class="hint" id="carer-enquiry-relationship-hint">For example: parent, carer, support coordinator.</span><input id="carer-enquiry-relationship" name="relationship" type="text" required aria-describedby="carer-enquiry-relationship-hint"></div>
+    <div class="field"><label for="carer-enquiry-phone">Phone <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-phone" name="phone" type="tel" autocomplete="tel" required></div>
+    <div class="field"><label for="carer-enquiry-email">Email <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-email" name="email" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="carer-enquiry-client-name">Client's first name <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-client-name" name="client-name" type="text" required></div>
+    <div class="field"><label for="carer-enquiry-client-age">Client's age</label><input id="carer-enquiry-client-age" name="client-age" type="text"></div>
+    <div class="field"><label for="carer-enquiry-suburb">Client's suburb <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-suburb" name="suburb" type="text" required></div>
+    <div class="field"><label for="carer-enquiry-service">Service you're interested in <span class="req" aria-hidden="true">*</span></label><select id="carer-enquiry-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
+    <div class="field"><label for="carer-enquiry-delivery">Home visit or telehealth? <span class="req" aria-hidden="true">*</span></label><select id="carer-enquiry-delivery" name="delivery" required><option value="">Choose one</option><option>Home visit</option><option>Telehealth</option><option>Either</option></select></div>
+    <div class="field"><label for="carer-enquiry-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="carer-enquiry-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
+    <fieldset class="field full"><legend>Times that usually suit</legend><div class="checks"><label class="check"><input type="checkbox" name="times[]" value="Weekday mornings"> Weekday mornings</label><label class="check"><input type="checkbox" name="times[]" value="Weekday afternoons"> Weekday afternoons</label><label class="check"><input type="checkbox" name="times[]" value="After school"> After school</label><label class="check"><input type="checkbox" name="times[]" value="Saturdays"> Saturdays</label></div></fieldset>
+    <div class="field full"><label for="carer-enquiry-preferences">Anything that would make first contact easier?</label><span class="hint" id="carer-enquiry-preferences-hint">For example: who to contact first, communication or sensory preferences.</span><textarea id="carer-enquiry-preferences" name="preferences" rows="4" aria-describedby="carer-enquiry-preferences-hint"></textarea></div>
+    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> I agree to Blossom contacting me about this enquiry, and I have the client's permission to make it. <span class="req" aria-hidden="true">*</span></label></div>
+  </div>
+  <p class="fine form-note">Please don't include medical details here. We'll talk about those with you directly. See our <a href="/privacy/">privacy policy</a>.</p>
+  <button class="btn" type="submit">Send enquiry</button>
+</form>
     </div>
     <div class="panel" role="tabpanel" id="panel-referrer" aria-labelledby="tab-referrer" hidden>
       <h3>Refer a client</h3>
       <p>Send us the referral and we'll contact your client directly.</p>
-      <div class="halaxy-slot" data-halaxy-form="Referrer form">
-  <!-- HALAXY EMBED: paste the "Referrer form" embed code here (Halaxy > Settings > General > Forms > ⋮ > Share settings > Embedded Form > Copy).
-       Then delete the fallback content below. -->
-  <p class="tag">Online form coming soon</p>
-  <p>Until our online form is ready, download our referral form or email a referral with:</p>
-  <ul><li>Client name, date of birth and phone number</li><li>Reason for referral and relevant history</li><li>Funding type (NDIS, Medicare CDM or private)</li><li>Your name, practice and contact details</li></ul>
-  <a class="btn" href="mailto:hello@blossomtherapy.au?subject=New%20referral">Email us</a>
-</div>
-      <p style="margin-top:14px"><a href="https://img1.wsimg.com/blobby/go/fc922215-55f7-48fb-bc5a-a0bc6ec97e0e/Client%20referral%20form.pdf">Download the referral form (PDF)</a></p>
+      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
+      <form class="enquiry" name="referral" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website" enctype="multipart/form-data">
+  <input type="hidden" name="form-name" value="referral">
+  <input type="hidden" name="subject" value="New referral">
+  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
+  <div class="fields">
+    <div class="field"><label for="referral-referrer-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="referral-referrer-name" name="referrer-name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="referral-referrer-role">Role and practice <span class="req" aria-hidden="true">*</span></label><span class="hint" id="referral-referrer-role-hint">For example: GP, Smith Street Medical.</span><input id="referral-referrer-role" name="referrer-role" type="text" required aria-describedby="referral-referrer-role-hint"></div>
+    <div class="field"><label for="referral-referrer-phone">Your phone</label><input id="referral-referrer-phone" name="referrer-phone" type="tel" autocomplete="tel"></div>
+    <div class="field"><label for="referral-referrer-email">Your email <span class="req" aria-hidden="true">*</span></label><input id="referral-referrer-email" name="referrer-email" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="referral-client-name">Client's full name <span class="req" aria-hidden="true">*</span></label><input id="referral-client-name" name="client-name" type="text" required></div>
+    <div class="field"><label for="referral-client-dob">Client's date of birth</label><input id="referral-client-dob" name="client-dob" type="date"></div>
+    <div class="field"><label for="referral-client-phone">Client's (or carer's) phone <span class="req" aria-hidden="true">*</span></label><input id="referral-client-phone" name="client-phone" type="tel" required></div>
+    <div class="field"><label for="referral-suburb">Client's suburb <span class="req" aria-hidden="true">*</span></label><input id="referral-suburb" name="suburb" type="text" required></div>
+    <div class="field"><label for="referral-service">Service <span class="req" aria-hidden="true">*</span></label><select id="referral-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
+    <div class="field"><label for="referral-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="referral-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
+    <div class="field full"><label for="referral-letter">Referral letter (optional)</label><span class="hint" id="referral-letter-hint">PDF or image, up to 8 MB. You can also email it to hello@blossomtherapy.au.</span><input id="referral-letter" name="referral-letter" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" aria-describedby="referral-letter-hint"></div>
+    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> The client (or their carer) has agreed to this referral. <span class="req" aria-hidden="true">*</span></label></div>
+  </div>
+  <p class="fine form-note">We'll contact your client directly. Clinical details are best included in the referral letter. See our <a href="/privacy/">privacy policy</a>.</p>
+  <button class="btn" type="submit">Send referral</button>
+</form>
+      <p class="fine" style="margin-top:14px">Prefer paper? <a href="https://img1.wsimg.com/blobby/go/fc922215-55f7-48fb-bc5a-a0bc6ec97e0e/Client%20referral%20form.pdf">Download the referral form (PDF)</a> and email it to <a href="mailto:hello@blossomtherapy.au">hello@blossomtherapy.au</a>.</p>
     </div>
   </div>
 </section>

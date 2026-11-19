@@ -167,3 +167,21 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-off
 
 .prose{max-width:780px}
 .prose h2{margin-top:34px;font-size:28px}
+
+/* Enquiry forms */
+.enquiry{margin-top:10px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin:12px 0 8px}
+.field{display:flex;flex-direction:column;gap:4px;border:0;padding:0;margin:0;min-width:0}
+.field.full{grid-column:1/-1}
+@media (max-width:640px){.fields{grid-template-columns:1fr}}
+.field label,.field legend{font-weight:600;font-size:15px}
+.field .hint{font-size:14px;color:#555}
+.req{color:var(--orange)}
+.enquiry input[type=text],.enquiry input[type=email],.enquiry input[type=tel],.enquiry input[type=date],.enquiry select,.enquiry textarea{font:16px var(--body);padding:11px 12px;border:1.5px solid #9BBFB8;border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.enquiry input[type=file]{font:15px var(--body)}
+.enquiry input:focus,.enquiry select:focus,.enquiry textarea:focus{outline:3px solid var(--orange);outline-offset:1px;border-color:var(--teal)}
+.checks{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:6px}
+.check{display:flex;gap:8px;align-items:flex-start;font-weight:400!important;font-size:16px!important}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--teal)}
+.hp{position:absolute;left:-9999px}
+.form-note{margin:10px 0 16px}

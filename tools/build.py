@@ -9,6 +9,10 @@ physiotherapy (Caite Brown) added. Markers in the HTML:
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from assets import GODADDY, FILES, REMOTE, GALLERY
+from forms import client_form, carer_form, referral_form, contact_form
+
+# Social groups are hidden for now. Set to True to bring them back.
+SHOW_GROUPS = False
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "site")
@@ -150,18 +154,21 @@ PICKER = f"""<section class="sec white" id="get-started" aria-labelledby="gs-h">
     <div class="panel" role="tabpanel" id="panel-client" aria-labelledby="tab-client">
       <h3>Tell us about you</h3>
       <p>One short form that you can fill in on your phone.</p>
-      {slot("Client intake", "Until our online form is ready, email us with:", ["Your name and phone number", "The service you're interested in (exercise physiology, physiotherapy, support work or social groups)", "Home visit or telehealth, and your suburb", "Funding (NDIS, private or other)", "Days and times that suit you"], "New client enquiry")}
+      <!-- HALAXY EMBED (later): the Halaxy client intake form can replace this form -->
+      {client_form()}
     </div>
     <div class="panel" role="tabpanel" id="panel-carer" aria-labelledby="tab-carer" hidden>
       <h3>Tell us about the person you support</h3>
       <p>Your details, their details, and what support would help.</p>
-      {slot("Carer intake", "Until our online form is ready, email us with:", ["Your name, phone number and relationship to the client", "The client's name and age", "The service you're interested in", "Home visit or telehealth, and suburb", "Funding (NDIS, private or other)", "Days and times that suit"], "Parent or carer enquiry")}
+      <!-- HALAXY EMBED (later): the Halaxy carer intake form can replace this form -->
+      {carer_form()}
     </div>
     <div class="panel" role="tabpanel" id="panel-referrer" aria-labelledby="tab-referrer" hidden>
       <h3>Refer a client</h3>
       <p>Send us the referral and we'll contact your client directly.</p>
-      {slot("Referrer form", "Until our online form is ready, download our referral form or email a referral with:", ["Client name, date of birth and phone number", "Reason for referral and relevant history", "Funding type (NDIS, Medicare CDM or private)", "Your name, practice and contact details"], "New referral")}
-      <p style="margin-top:14px"><a href="{file_url('Client-referral-form.pdf')}">Download the referral form (PDF)</a></p>
+      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
+      {referral_form()}
+      <p class="fine" style="margin-top:14px">Prefer paper? <a href="{file_url('Client-referral-form.pdf')}">Download the referral form (PDF)</a> and email it to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
     </div>
   </div>
 </section>"""
@@ -303,7 +310,7 @@ about = f"""
         "<p>With a Master's in Women's Health Medicine, Olivia brings specialised knowledge and experience. She is particularly passionate about helping those with invisible illnesses like hEDS, POTS, CFS/ME and Fibromyalgia, as well as supporting individuals facing long covid and cancer. Her dedication extends to empowering women to understand their bodies, manage their health confidently, and feel strong through movement and education, emphasising the importance of movement in healing.</p>")}
       {member(None, "Caite", "Physiotherapist",
         "<!-- CONFIRM: Caite to review and edit this bio, and add a photo (assets/img/caite.jpg) -->"
-        "<p>Caite is a physiotherapist who is currently completing a Master of Sport and Exercise Physiotherapy at The University of Queensland. She delivers Blossom's physiotherapy service, with home visits and telehealth, bringing the same paced, collaborative and neuro-affirming approach to injury, pain and movement.</p>")}
+        "<p>Caite is a physiotherapist who is currently completing a Master of Sport and Exercise Physiotherapy at The University of Queensland. She delivers Blossom's physiotherapy service, with home visits and telehealth.</p>")}
       {member("IMG_8920.jpeg", "Michaela", "Support Worker",
         "<p>Currently studying Paramedicine, Michaela brings a calm, patient, and nurturing energy to her work. Her gentle presence helps clients, including those managing invisible illnesses and neurodiversity, feel supported, safe, and understood as they build confidence and independence in daily life.</p>")}
     </div>
@@ -315,6 +322,36 @@ page("/about-us/", "About Us | Blossom Therapy & Supports",
      "Neurodivergent support at Blossom Therapy & Supports. Our why, our philosophy, and the team of exercise physiologists, a physiotherapist and support workers.", about)
 
 # ---------------- Services ----------------
+GROUPS_SECTION = (f"""<section class="sec" id="groups">
+  <div class="wrap">
+    <h2>Girls Social Support Groups</h2>
+    <hr class="rule">
+    <div class="grid">
+      <div class="card"><h3>Wattle Crew</h3><p>Fortnightly sessions on Saturday afternoons for school aged girls looking for socialising and engaging in wholesome activities!</p><p><strong>Max. 6 girls</strong></p></div>
+      <div class="card"><h3>Banksia Crew</h3><p>Weekly sessions on Thursday afternoons for girls who have just left school or who are homeschooled!</p><p><strong>Max. 6 girls</strong></p><p class="fine">*Please note some weeks the session will run on a Friday due to staff being away.</p></div>
+      <div class="card peach">
+        <h3>Details</h3>
+        <ul class="tick">
+          <li>Cost: $150 per session</li>
+          <li>Duration: 3 hours (usually 1pm to 4pm)</li>
+          <li>Activities include beach walks, botanical gardens, crafts, baking, gentle yoga and outings</li>
+          <li>Need help with transport to or from the meeting location? Reach out and we may be able to assist.</li>
+        </ul>
+      </div>
+    </div>
+    <h3 style="color:var(--teal);margin-top:36px">Meet your support group leaders</h3>
+    <p><strong>Olivia</strong> (Liv) is an Accredited Exercise Physiologist with a Master's in Women's Health and a passionate Disability Support Worker. She is passionate about creating a space for like-minded girls to come together, participate in wholesome activities, find meaningful hobbies and build independence. These groups are Liv's babies, and she is your go-to if you need any assistance.</p>
+    <p><strong>Emma</strong> is the founder of Blossom Therapy &amp; Supports. You may see Emma filling in for Liv while she is away, or you may chat to her when enquiring about the sessions.</p>
+    <!-- TODO: current term calendar images (the Term 1 2026 ones on the old site are out of date). Upload as assets/img/wattle-calendar.png and banksia-calendar.png -->
+    <div class="halaxy-slot" data-halaxy-form="Group waitlist">
+      <!-- HALAXY EMBED: paste the "Group waitlist" form embed code here, then delete the fallback below. -->
+      <p class="tag">Join the list</p>
+      <p>Email us with the participant's name and age, which group, and a contact number. We'll send you the current term calendar and let you know when a spot is available.</p>
+      <a class="btn" href="{mailto('Social group enquiry')}">Enquire about groups</a>
+    </div>
+  </div>
+</section>""" if SHOW_GROUPS else "<!-- Social groups hidden: set SHOW_GROUPS = True in tools/build.py -->")
+
 services = page_hero("Our Services", "We are a small team of Exercise Physiologists, a Physiotherapist and Disability Support Workers on the Gold Coast. We specialise in supporting neurodivergent individuals, young women, and people living with invisible or fluctuating health conditions.") + f"""
 <section class="sec">
   <div class="wrap split">
@@ -345,9 +382,9 @@ services = page_hero("Our Services", "We are a small team of Exercise Physiologi
     <div>
       <h2>Physiotherapy</h2>
       <p class="fine" style="color:var(--orange);font-weight:700;margin-top:-4px">New at Blossom</p>
-      <p>Physiotherapy is now part of the Blossom team, delivered by Caite. Caite assesses and treats injury, pain and movement problems with the same paced, collaborative and neuro-affirming approach as the rest of the team.</p>
+      <p>Physiotherapy is now part of Blossom. Our physiotherapist assesses and treats injury, pain and movement problems, with care that is paced, collaborative and built around you.</p>
       <p>Home visits on the Gold Coast, and telehealth.</p>
-      <!-- CONFIRM: any areas of focus Caite wants listed (e.g. hypermobility, persistent pain, return to sport) -->
+      <!-- CONFIRM: any areas of focus to list for physiotherapy -->
       <a class="btn" href="/#get-started">Work With Us</a>
     </div>
   </div>
@@ -364,40 +401,18 @@ services = page_hero("Our Services", "We are a small team of Exercise Physiologi
   </div>
 </section>
 
-<section class="sec" id="groups">
-  <div class="wrap">
-    <h2>Girls Social Support Groups</h2>
-    <hr class="rule">
-    <div class="grid">
-      <div class="card"><h3>Wattle Crew</h3><p>Fortnightly sessions on Saturday afternoons for school aged girls looking for socialising and engaging in wholesome activities!</p><p><strong>Max. 6 girls</strong></p></div>
-      <div class="card"><h3>Banksia Crew</h3><p>Weekly sessions on Thursday afternoons for girls who have just left school or who are homeschooled!</p><p><strong>Max. 6 girls</strong></p><p class="fine">*Please note some weeks the session will run on a Friday due to staff being away.</p></div>
-      <div class="card peach">
-        <h3>Details</h3>
-        <ul class="tick">
-          <li>Cost: $150 per session</li>
-          <li>Duration: 3 hours (usually 1pm to 4pm)</li>
-          <li>Activities include beach walks, botanical gardens, crafts, baking, gentle yoga and outings</li>
-          <li>Need help with transport to or from the meeting location? Reach out and we may be able to assist.</li>
-        </ul>
-      </div>
-    </div>
-    <h3 style="color:var(--teal);margin-top:36px">Meet your support group leaders</h3>
-    <p><strong>Olivia</strong> (Liv) is an Accredited Exercise Physiologist with a Master's in Women's Health and a passionate Disability Support Worker. She is passionate about creating a space for like-minded girls to come together, participate in wholesome activities, find meaningful hobbies and build independence. These groups are Liv's babies, and she is your go-to if you need any assistance.</p>
-    <p><strong>Emma</strong> is the founder of Blossom Therapy &amp; Supports. You may see Emma filling in for Liv while she is away, or you may chat to her when enquiring about the sessions.</p>
-    <!-- TODO: current term calendar images (the Term 1 2026 ones on the old site are out of date). Upload as assets/img/wattle-calendar.png and banksia-calendar.png -->
-    <div class="halaxy-slot" data-halaxy-form="Group waitlist">
-      <!-- HALAXY EMBED: paste the "Group waitlist" form embed code here, then delete the fallback below. -->
-      <p class="tag">Join the list</p>
-      <p>Email us with the participant's name and age, which group, and a contact number. We'll send you the current term calendar and let you know when a spot is available.</p>
-      <a class="btn" href="{mailto('Social group enquiry')}">Enquire about groups</a>
-    </div>
-  </div>
-</section>
+{GROUPS_SECTION}
 """
 page("/our-services/", "Exercise Physiology, Physiotherapy & Disability Support Services | Blossom",
-     "Exercise physiology, women's health exercise physiology, physiotherapy, NDIS disability support work and girls' social groups on the Gold Coast and via telehealth.", services)
+     "Exercise physiology, women's health exercise physiology, physiotherapy and NDIS disability support work on the Gold Coast and via telehealth.", services)
 
 # ---------------- Pricing ----------------
+GROUPS_PRICE = (f"""    <div class="price-group">
+      <h3>Girls Social Support Groups</h3>
+      {prow("Wattle Crew or Banksia Crew", "$150", "Per session, 3 hours")}
+    </div>
+""" if SHOW_GROUPS else "")
+
 def prow(name, price, detail=""):
     d = f'<span class="detail">{detail}</span>' if detail else ""
     return f'<div class="price-row"><span class="name">{name}</span><strong>{price}</strong>{d}</div>'
@@ -407,12 +422,11 @@ pricing = page_hero("Service Prices", "Clear prices, so there are no surprises."
   <div class="wrap" style="max-width:860px">
     <div class="price-group">
       <h3>Exercise Physiology and Physiotherapy: Home Visit</h3>
-      <p class="note">Provided by an Accredited Exercise Physiologist or Physiotherapist in your home or community. Travel is included within a 30-minute drive. $175 per hour.</p>
+      <p class="note">Provided by an Accredited Exercise Physiologist or Physiotherapist in your home or community. Travel is included within a 30-minute drive.</p>
       {prow("Initial Appointment", "$175", "60 minutes")}
-      {prow("Standard Appointment", "$131.25", "45 minutes")}
+      {prow("Standard Appointment", "$140", "45 minutes")}
       {prow("Extended Appointment", "$175", "60 minutes")}
       {prow("Travel Fee", "$45", "For travel beyond 30 minutes")}
-      <!-- CONFIRM: 45-min price is pro rata of $175/hr. Change if a fixed price is preferred. -->
     </div>
     <div class="price-group">
       <h3>Exercise Physiology and Physiotherapy: Telehealth</h3>
@@ -428,13 +442,13 @@ pricing = page_hero("Service Prices", "Clear prices, so there are no surprises."
       {prow("Initial Appointment", "$242.99", "60-minute appointment + Initial Assessment report")}
       {prow("Standard Appointment", "$161.99", "60 minutes")}
       {prow("Short Appointment", "$81.00", "30 minutes")}
-      {prow("NDIS Review Report", "$161.99 – $323.98", "Based on level of depth required and time to complete")}
+      {prow("Reports", "Billed on time", "Charged at the hourly rate for the time taken to complete")}
     </div>
     <div class="price-group">
       <h3>Physiotherapy: NDIS</h3>
       <p class="note">Provided by a Physiotherapist in your home or in the community.</p>
-      {prow("Hourly rate", "Up to $183.99", "Billed in line with the NDIS Pricing Schedule 2026–27")}
-      <!-- CONFIRM: NDIS physio items, session lengths and report pricing -->
+      {prow("Hourly rate", "$183.99", "Billed in line with the NDIS Pricing Schedule 2026–27")}
+      {prow("Reports", "Billed on time", "Charged at the hourly rate for the time taken to complete")}
     </div>
     <div class="price-group">
       <h3>Support Work Services</h3>
@@ -444,17 +458,13 @@ pricing = page_hero("Service Prices", "Clear prices, so there are no surprises."
       {prow("Travel", "$1/km", "Travel done within the session, in the support worker's car")}
       <p class="fine" style="margin-top:14px">*Prices shown are representative of weekday, daytime prices. For weekend or public holiday prices please refer to the NDIS table of costs or email us for assistance. We bill in line with the NDIS Price Guide and are happy to liaise with support coordinators regarding budgets.</p>
     </div>
-    <div class="price-group">
-      <h3>Girls Social Support Groups</h3>
-      {prow("Wattle Crew or Banksia Crew", "$150", "Per session, 3 hours")}
-    </div>
-    <p class="center"><a class="btn" href="/#get-started">Work With Us</a></p>
+{GROUPS_PRICE}    <p class="center"><a class="btn" href="/#get-started">Work With Us</a></p>
     <!-- TODO: cancellation policy and payment methods, if the team wants them listed -->
   </div>
 </section>
 """
 page("/pricing-and-funding/", "Pricing & Funding | Blossom Therapy & Supports",
-     "Prices for home visit and telehealth exercise physiology and physiotherapy, NDIS rates, support work and social groups.", pricing)
+     "Prices for home visit and telehealth exercise physiology and physiotherapy, NDIS rates and support work.", pricing)
 
 # ---------------- Referrals ----------------
 referrals = page_hero("Referral Form", "New clients and referrers: send us a referral and we will contact you once we receive it.") + f"""
@@ -462,22 +472,16 @@ referrals = page_hero("Referral Form", "New clients and referrers: send us a ref
   <div class="wrap split" style="align-items:start">
     <div>
       <h2>Refer a client</h2>
-      <div class="halaxy-slot" data-halaxy-form="Referrer form">
-        <!-- HALAXY EMBED: paste the professional-contact (referrer) form embed code here, then delete the fallback below. -->
-        <p class="tag">Online referral coming soon</p>
-        <p>For now, please complete the referral form and email it to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
-        <div class="btn-row">
-          <a class="btn" href="{file_url('Client-referral-form.pdf')}">Download PDF</a>
-          <a class="btn outline" href="{mailto('New referral')}">Email a referral</a>
-        </div>
-      </div>
+      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
+      {referral_form()}
+      <p class="fine" style="margin-top:14px">Prefer paper? <a href="{file_url('Client-referral-form.pdf')}">Download the referral form (PDF)</a> and email it to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
     </div>
     <div class="card" style="background:var(--peach)">
       <h3 style="color:var(--orange)">Please include</h3>
       <ul class="tick">
         <li>Client name, date of birth and phone number</li>
         <li>Reason for referral and relevant history</li>
-        <li>Service: exercise physiology, physiotherapy, support work or social groups</li>
+        <li>Service: exercise physiology, physiotherapy or support work</li>
         <li>Funding: NDIS, Medicare CDM or private</li>
         <li>Your name, practice and contact details</li>
       </ul>
@@ -486,7 +490,7 @@ referrals = page_hero("Referral Form", "New clients and referrers: send us a ref
 </section>
 """
 page("/referrals/", "Client Referral Form | Blossom Therapy",
-     "Refer a client to Blossom Therapy & Supports for exercise physiology, physiotherapy, disability support or social groups.", referrals)
+     "Refer a client to Blossom Therapy & Supports for exercise physiology, physiotherapy or disability support.", referrals)
 
 # ---------------- Resources ----------------
 RES = [
@@ -522,7 +526,7 @@ contact = page_hero("Contact Us") + f"""
       <p>We understand that every person and every journey is unique, especially when it comes to disability support work or navigating an invisible illness. That's why we offer a free 30-minute chat: to connect, have an honest conversation about what you're seeking, and explore if we're the right team to support you. Whether you're interested in exercise physiology, physiotherapy, neurodiversity, or women's health, there's no pressure, just an opportunity to see if it feels right.</p>
       <div class="btn-row">
         <a class="btn" href="/#get-started">Work With Us</a>
-        <a class="btn outline" href="{mailto('Free 30-minute chat')}">Book a free chat</a>
+        <a class="btn outline" href="#contact-form">Ask about a free chat</a>
       </div>
       <h2 style="margin-top:40px;font-size:28px">Already a client?</h2>
       <p>Email us to book, change or cancel an appointment.</p>
@@ -539,6 +543,12 @@ contact = page_hero("Contact Us") + f"""
       </ul>
       <!-- TODO: phone number and hours, if the team wants them published -->
     </div>
+  </div>
+</section>
+<section class="sec peach" id="contact-form">
+  <div class="wrap" style="max-width:820px">
+    <h2>Enquire here</h2>
+    {contact_form()}
   </div>
 </section>
 """
@@ -587,6 +597,10 @@ access = page_hero("Accessibility", "We want this website to work for everyone."
 </section>
 """
 page("/accessibility/", "Accessibility | Blossom Therapy & Supports", "Accessibility at Blossom Therapy & Supports.", access)
+
+# ---------------- Thank you ----------------
+thanks = page_hero("Thank you", "We've received your message and will be in touch within 1 business day.") + '<section class="sec"><div class="wrap"><a class="btn" href="/">Back to the home page</a></div></section>'
+page("/thank-you/", "Thank you | Blossom Therapy & Supports", "Thanks for getting in touch with Blossom Therapy & Supports.", thanks)
 
 # ---------------- 404 ----------------
 nf = page_hero("Page not found", "Sorry, we couldn't find that page.") + '<section class="sec"><div class="wrap"><a class="btn" href="/">Go to the home page</a></div></section>'

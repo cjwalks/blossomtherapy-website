@@ -48,7 +48,7 @@
       <p>We understand that every person and every journey is unique, especially when it comes to disability support work or navigating an invisible illness. That's why we offer a free 30-minute chat: to connect, have an honest conversation about what you're seeking, and explore if we're the right team to support you. Whether you're interested in exercise physiology, physiotherapy, neurodiversity, or women's health, there's no pressure, just an opportunity to see if it feels right.</p>
       <div class="btn-row">
         <a class="btn" href="/#get-started">Work With Us</a>
-        <a class="btn outline" href="mailto:hello@blossomtherapy.au?subject=Free%2030-minute%20chat">Book a free chat</a>
+        <a class="btn outline" href="#contact-form">Ask about a free chat</a>
       </div>
       <h2 style="margin-top:40px;font-size:28px">Already a client?</h2>
       <p>Email us to book, change or cancel an appointment.</p>
@@ -65,6 +65,25 @@
       </ul>
       <!-- TODO: phone number and hours, if the team wants them published -->
     </div>
+  </div>
+</section>
+<section class="sec peach" id="contact-form">
+  <div class="wrap" style="max-width:820px">
+    <h2>Enquire here</h2>
+    <form class="enquiry" name="contact" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website">
+  <input type="hidden" name="form-name" value="contact">
+  <input type="hidden" name="subject" value="Website enquiry">
+  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
+  <div class="fields">
+    <div class="field"><label for="contact-name">Name <span class="req" aria-hidden="true">*</span></label><input id="contact-name" name="name" type="text" autocomplete="name" required></div>
+    <div class="field"><label for="contact-email">Email <span class="req" aria-hidden="true">*</span></label><input id="contact-email" name="email" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="contact-phone">Phone</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel"></div>
+    <div class="field full"><label for="contact-message">Message <span class="req" aria-hidden="true">*</span></label><span class="hint" id="contact-message-hint">Tell us what you're looking for, or ask about a free 30-minute chat.</span><textarea id="contact-message" name="message" rows="4" required aria-describedby="contact-message-hint"></textarea></div>
+  </div>
+  <p class="fine form-note">Please don't include medical details here. We'll talk about those with you directly. See our <a href="/privacy/">privacy policy</a>.</p>
+  <button class="btn" type="submit">Send</button>
+</form>
   </div>
 </section>
 
