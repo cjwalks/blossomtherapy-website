@@ -37,3 +37,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (t) { select(t); }
   }
 });
+
+// Instagram posts: load Instagram's embed script only when the section is near the screen
+(function () {
+  var box = document.querySelector('[data-insta]');
+  if (!box) return;
+  function load() {
+    if (window.__igLoaded) return; window.__igLoaded = true;
+    var s = document.createElement('script'); s.async = true; s.src = 'https://www.instagram.com/embed.js';
+    document.body.appendChild(s);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: '400px' });
+    io.observe(box);
+  } else { load(); }
+})();

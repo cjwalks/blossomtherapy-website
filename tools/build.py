@@ -9,7 +9,8 @@ physiotherapy (Caite Brown) added. Markers in the HTML:
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from assets import GODADDY, FILES, REMOTE, GALLERY
-from forms import client_form, carer_form, referral_form, contact_form
+from forms import contact_form
+from booking import booking_page_body
 
 # Social groups are hidden for now. Set to True to bring them back.
 SHOW_GROUPS = False
@@ -53,7 +54,7 @@ FB_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.5
 IG_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3a4.7 4.7 0 100 9.4 4.7 4.7 0 000-9.4zm0 7.7a3 3 0 110-6 3 3 0 010 6zm6-7.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0zM21 8c-.1-1.5-.4-2.8-1.5-3.9S17 2.7 15.5 2.6C14 2.5 10 2.5 8.5 2.6 7 2.7 5.7 3 4.6 4.1S3.1 6.5 3 8c-.1 1.5-.1 6.5 0 8 .1 1.5.4 2.8 1.5 3.9S7 21.3 8.5 21.4c1.5.1 5.5.1 7 0 1.5-.1 2.8-.4 3.9-1.5s1.4-2.4 1.5-3.9c.1-1.5.1-6.5 0-8zm-2 9.7a3 3 0 01-1.7 1.7c-1.2.5-4 .4-5.3.4s-4.1.1-5.3-.4a3 3 0 01-1.7-1.7c-.5-1.2-.4-4-.4-5.3s-.1-4.1.4-5.3A3 3 0 016.7 5c1.2-.5 4-.4 5.3-.4s4.1-.1 5.3.4A3 3 0 0119 6.7c.5 1.2.4 4 .4 5.3s.1 4.1-.4 5.3z"/></svg>'
 
 
-def page(path, title, desc, body):
+def page(path, title, desc, body, extra_head=""):
     nav_items = "\n".join(
         '<li><a href="%s"%s>%s</a></li>' % (href, ' aria-current="page"' if href == path else "", label)
         for href, label in NAV
@@ -78,6 +79,7 @@ def page(path, title, desc, body):
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
 <script src="/assets/site.js" defer></script>
+{extra_head}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -88,7 +90,7 @@ def page(path, title, desc, body):
     <nav class="main-nav" id="main-nav" aria-label="Main">
       <ul>
 {nav_items}
-        <li><a class="btn small" href="/#get-started">Work With Us</a></li>
+        <li><a class="btn small" href="/book/">Book now</a></li>
       </ul>
     </nav>
   </div>
@@ -105,7 +107,7 @@ def page(path, title, desc, body):
     <p class="name">Blossom Therapy and Supports</p>
     <p>Gold Coast QLD, Australia &middot; <a href="mailto:{EMAIL}">{EMAIL}</a></p>
     <ul class="footer-links">
-      <li><a href="/#get-started">Get started</a></li>
+      <li><a href="/book/">Book now</a></li>
       <li><a href="/referrals/">Referrals</a></li>
       <li><a href="/privacy/">Privacy policy</a></li>
       <li><a href="/accessibility/">Accessibility</a></li>
@@ -140,40 +142,23 @@ def slot(form_name, intro, items, subject):
 </div>"""
 
 
-PICKER = f"""<section class="sec white" id="get-started" aria-labelledby="gs-h">
+PICKER = """<section class="sec white" id="get-started" aria-labelledby="gs-h">
   <div class="wrap">
-    <span id="start-client"></span><span id="start-carer"></span><span id="start-referrer"></span>
-    <h2 id="gs-h">Work with us</h2>
-    <p class="lead">Choose the option that fits you. We'll be in touch within 1 business day.</p>
+    <h2 id="gs-h">Book with Blossom</h2>
+    <p class="lead">A few short steps, about 3 minutes. We'll be in touch within 1 business day to confirm a time with you.</p>
     <!-- CONFIRM: response time with Emma -->
-    <div class="picker" role="tablist" aria-label="Who are you?">
-      <button role="tab" id="tab-client" aria-controls="panel-client" aria-selected="true">I'm a client</button>
-      <button role="tab" id="tab-carer" aria-controls="panel-carer" aria-selected="false" tabindex="-1">I'm a parent or carer</button>
-      <button role="tab" id="tab-referrer" aria-controls="panel-referrer" aria-selected="false" tabindex="-1">I'm a GP or referrer</button>
-    </div>
-    <div class="panel" role="tabpanel" id="panel-client" aria-labelledby="tab-client">
-      <h3>Tell us about you</h3>
-      <p>One short form that you can fill in on your phone.</p>
-      <!-- HALAXY EMBED (later): the Halaxy client intake form can replace this form -->
-      {client_form()}
-    </div>
-    <div class="panel" role="tabpanel" id="panel-carer" aria-labelledby="tab-carer" hidden>
-      <h3>Tell us about the person you support</h3>
-      <p>Your details, their details, and what support would help.</p>
-      <!-- HALAXY EMBED (later): the Halaxy carer intake form can replace this form -->
-      {carer_form()}
-    </div>
-    <div class="panel" role="tabpanel" id="panel-referrer" aria-labelledby="tab-referrer" hidden>
-      <h3>Refer a client</h3>
-      <p>Send us the referral and we'll contact your client directly.</p>
-      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
-      {referral_form()}
-      <p class="fine" style="margin-top:14px">Prefer paper? <a href="{file_url('Client-referral-form.pdf')}">Download the referral form (PDF)</a> and email it to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+    <div class="path-grid">
+      <a class="path-card" href="/book/#client"><span class="path-title">I'm booking for myself</span><span>Exercise physiology, physiotherapy or support work for you.</span></a>
+      <a class="path-card" href="/book/#carer"><span class="path-title">I'm a parent or carer</span><span>Book for someone you support.</span></a>
+      <a class="path-card" href="/book/#referrer"><span class="path-title">I'm a GP or referrer</span><span>Refer a client and we'll contact them directly.</span></a>
     </div>
   </div>
 </section>"""
 
 # ---------------- Home ----------------
+# Instagram: latest posts to embed. Update the codes (from each post URL) to change them.
+INSTAGRAM_POSTS = ['Df82sSqk13b', 'DfRpUbYSjM1', 'DfTMzJsSl2b']
+INSTA_HTML = "".join(f'<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/{c}/" data-instgrm-version="14"><a href="https://www.instagram.com/p/{c}/" rel="noopener">View this post on Instagram</a></blockquote>' for c in INSTAGRAM_POSTS)
 GALLERY_HTML = "\n      ".join(f'<img src="{img(g, 800)}" alt="A Blossom moment" loading="lazy">' for g in GALLERY)
 
 home = f"""
@@ -185,8 +170,8 @@ home = f"""
         <h1>Blossom Therapy &amp; Supports</h1>
         <p>Shifting perspectives with movement, strength and meaningful support</p>
         <div class="btn-row">
-          <a class="btn light" href="#get-started">Work With Us</a>
-          <a class="btn outline" style="color:#fff;border-color:#fff" href="/#start-referrer">I'm a GP or referrer</a>
+          <a class="btn light" href="/book/">Work With Us</a>
+          <a class="btn outline" style="color:#fff;border-color:#fff" href="/book/#referrer">I'm a GP or referrer</a>
         </div>
       </div>
     </div>
@@ -248,6 +233,15 @@ home = f"""
       {GALLERY_HTML}
     </div>
     <!-- TODO: better alt text describing each photo -->
+  </div>
+</section>
+
+<section class="sec insta" id="instagram" aria-labelledby="ig-h">
+  <div class="wrap">
+    <h2 id="ig-h">Follow along on Instagram</h2>
+    <p class="lead"><a href="{IG}" rel="noopener">@blossomtherapyandsupports</a></p>
+    <div class="insta-grid" data-insta>{INSTA_HTML}</div>
+    <p class="center"><a class="btn" href="{IG}" rel="noopener">Follow us on Instagram</a></p>
   </div>
 </section>
 """
@@ -360,7 +354,7 @@ services = page_hero("Our Services", "We are a small team of Exercise Physiologi
       <h2>Exercise Physiology</h2>
       <p>Movement and strength support built around your body, capacity and goals, delivered by Accredited Exercise Physiologists in your home, in the community, or via telehealth.</p>
       <p>We believe everyone should have access to specialised and individualised Exercise Physiology. This is why we provide Telehealth services for people all over Australia.</p>
-      <a class="btn" href="/#get-started">Work With Us</a>
+      <a class="btn" href="/book/">Work With Us</a>
     </div>
   </div>
 </section>
@@ -385,7 +379,7 @@ services = page_hero("Our Services", "We are a small team of Exercise Physiologi
       <p>Physiotherapy is now part of Blossom. Our physiotherapist assesses and treats injury, pain and movement problems, with care that is paced, collaborative and built around you.</p>
       <p>Home visits on the Gold Coast, and telehealth.</p>
       <!-- CONFIRM: any areas of focus to list for physiotherapy -->
-      <a class="btn" href="/#get-started">Work With Us</a>
+      <a class="btn" href="/book/">Work With Us</a>
     </div>
   </div>
 </section>
@@ -458,7 +452,7 @@ pricing = page_hero("Service Prices", "Clear prices, so there are no surprises."
       {prow("Travel", "$1/km", "Travel done within the session, in the support worker's car")}
       <p class="fine" style="margin-top:14px">*Prices shown are representative of weekday, daytime prices. For weekend or public holiday prices please refer to the NDIS table of costs or email us for assistance. We bill in line with the NDIS Price Guide and are happy to liaise with support coordinators regarding budgets.</p>
     </div>
-{GROUPS_PRICE}    <p class="center"><a class="btn" href="/#get-started">Work With Us</a></p>
+{GROUPS_PRICE}    <p class="center"><a class="btn" href="/book/">Work With Us</a></p>
     <!-- TODO: cancellation policy and payment methods, if the team wants them listed -->
   </div>
 </section>
@@ -472,8 +466,8 @@ referrals = page_hero("Referral Form", "New clients and referrers: send us a ref
   <div class="wrap split" style="align-items:start">
     <div>
       <h2>Refer a client</h2>
-      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
-      {referral_form()}
+      <p>Use our online referral. It takes about 3 minutes, and you can attach a referral letter or care plan.</p>
+      <p><a class="btn" href="/book/#referrer">Make a referral</a></p>
       <p class="fine" style="margin-top:14px">Prefer paper? <a href="{file_url('Client-referral-form.pdf')}">Download the referral form (PDF)</a> and email it to <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
     </div>
     <div class="card" style="background:var(--peach)">
@@ -525,7 +519,7 @@ contact = page_hero("Contact Us") + f"""
       <h2>Want to see if we are right for you?</h2>
       <p>We understand that every person and every journey is unique, especially when it comes to disability support work or navigating an invisible illness. That's why we offer a free 30-minute chat: to connect, have an honest conversation about what you're seeking, and explore if we're the right team to support you. Whether you're interested in exercise physiology, physiotherapy, neurodiversity, or women's health, there's no pressure, just an opportunity to see if it feels right.</p>
       <div class="btn-row">
-        <a class="btn" href="/#get-started">Work With Us</a>
+        <a class="btn" href="/book/">Work With Us</a>
         <a class="btn outline" href="#contact-form">Ask about a free chat</a>
       </div>
       <h2 style="margin-top:40px;font-size:28px">Already a client?</h2>
@@ -566,7 +560,7 @@ privacy = page_hero("Privacy Policy", "How we collect, use and protect your info
     <h2>What we collect</h2>
     <p>Contact details, date of birth, funding details (such as NDIS or Medicare), health information relevant to your care, referral information, and notes from your sessions.</p>
     <h2>How we collect it</h2>
-    <p>From you or your carer through our online forms, email, phone or in person, and from your referrer or other health providers with your consent.</p>
+    <p>From you or your carer through our online booking forms, email, phone or in person, and from your referrer or other health providers with your consent. Our website forms ask only for contact and booking details and a short description of how we can help. Form submissions are processed by our website host, Netlify, which may store them outside Australia.</p>
     <h2>How we store it</h2>
     <p>Client records and online forms are held in Halaxy, our practice management system, which stores data in Australia. This website does not store health information.</p>
     <h2>How we use and share it</h2>
@@ -576,7 +570,7 @@ privacy = page_hero("Privacy Policy", "How we collect, use and protect your info
     <h2>Complaints</h2>
     <p>Contact us first at <a href="mailto:{EMAIL}">{EMAIL}</a>. If you're not satisfied, you can contact the Office of the Australian Information Commissioner (oaic.gov.au). NDIS participants can also contact the NDIS Quality and Safeguards Commission.</p>
     <h2>This website</h2>
-    <p>This site does not use tracking or advertising cookies.</p>
+    <p>This site does not use tracking or advertising cookies. Our home page shows posts from our Instagram account, which are loaded from Instagram and covered by Instagram's own privacy policy.</p>
   </div>
 </section>
 """
@@ -597,6 +591,11 @@ access = page_hero("Accessibility", "We want this website to work for everyone."
 </section>
 """
 page("/accessibility/", "Accessibility | Blossom Therapy & Supports", "Accessibility at Blossom Therapy & Supports.", access)
+
+# ---------------- Book ----------------
+page("/book/", "Book | Blossom Therapy & Supports",
+     "Book exercise physiology, physiotherapy or support work with Blossom Therapy & Supports, or send a referral.",
+     booking_page_body(), extra_head='<script src="/assets/booking.js" defer></script>')
 
 # ---------------- Thank you ----------------
 thanks = page_hero("Thank you", "We've received your message and will be in touch within 1 business day.") + '<section class="sec"><div class="wrap"><a class="btn" href="/">Back to the home page</a></div></section>'

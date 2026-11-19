@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
 <script src="/assets/site.js" defer></script>
+
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -34,7 +35,7 @@
 <li><a href="/referrals/">Referrals</a></li>
 <li><a href="/resources/">Resources</a></li>
 <li><a href="/contact-us/">Contact us</a></li>
-        <li><a class="btn small" href="/#get-started">Work With Us</a></li>
+        <li><a class="btn small" href="/book/">Book now</a></li>
       </ul>
     </nav>
   </div>
@@ -49,8 +50,8 @@
         <h1>Blossom Therapy &amp; Supports</h1>
         <p>Shifting perspectives with movement, strength and meaningful support</p>
         <div class="btn-row">
-          <a class="btn light" href="#get-started">Work With Us</a>
-          <a class="btn outline" style="color:#fff;border-color:#fff" href="/#start-referrer">I'm a GP or referrer</a>
+          <a class="btn light" href="/book/">Work With Us</a>
+          <a class="btn outline" style="color:#fff;border-color:#fff" href="/book/#referrer">I'm a GP or referrer</a>
         </div>
       </div>
     </div>
@@ -105,95 +106,13 @@
 
 <section class="sec white" id="get-started" aria-labelledby="gs-h">
   <div class="wrap">
-    <span id="start-client"></span><span id="start-carer"></span><span id="start-referrer"></span>
-    <h2 id="gs-h">Work with us</h2>
-    <p class="lead">Choose the option that fits you. We'll be in touch within 1 business day.</p>
+    <h2 id="gs-h">Book with Blossom</h2>
+    <p class="lead">A few short steps, about 3 minutes. We'll be in touch within 1 business day to confirm a time with you.</p>
     <!-- CONFIRM: response time with Emma -->
-    <div class="picker" role="tablist" aria-label="Who are you?">
-      <button role="tab" id="tab-client" aria-controls="panel-client" aria-selected="true">I'm a client</button>
-      <button role="tab" id="tab-carer" aria-controls="panel-carer" aria-selected="false" tabindex="-1">I'm a parent or carer</button>
-      <button role="tab" id="tab-referrer" aria-controls="panel-referrer" aria-selected="false" tabindex="-1">I'm a GP or referrer</button>
-    </div>
-    <div class="panel" role="tabpanel" id="panel-client" aria-labelledby="tab-client">
-      <h3>Tell us about you</h3>
-      <p>One short form that you can fill in on your phone.</p>
-      <!-- HALAXY EMBED (later): the Halaxy client intake form can replace this form -->
-      <form class="enquiry" name="client-enquiry" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website">
-  <input type="hidden" name="form-name" value="client-enquiry">
-  <input type="hidden" name="subject" value="New client enquiry">
-  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
-  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
-  <div class="fields">
-    <div class="field"><label for="client-enquiry-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-name" name="name" type="text" autocomplete="name" required></div>
-    <div class="field"><label for="client-enquiry-phone">Phone <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-phone" name="phone" type="tel" autocomplete="tel" required></div>
-    <div class="field"><label for="client-enquiry-email">Email <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-email" name="email" type="email" autocomplete="email" required></div>
-    <div class="field"><label for="client-enquiry-suburb">Suburb <span class="req" aria-hidden="true">*</span></label><input id="client-enquiry-suburb" name="suburb" type="text" autocomplete="address-level2" required></div>
-    <div class="field"><label for="client-enquiry-service">Service you're interested in <span class="req" aria-hidden="true">*</span></label><select id="client-enquiry-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
-    <div class="field"><label for="client-enquiry-delivery">Home visit or telehealth? <span class="req" aria-hidden="true">*</span></label><select id="client-enquiry-delivery" name="delivery" required><option value="">Choose one</option><option>Home visit</option><option>Telehealth</option><option>Either</option></select></div>
-    <div class="field"><label for="client-enquiry-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="client-enquiry-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
-    <fieldset class="field full"><legend>Times that usually suit you</legend><div class="checks"><label class="check"><input type="checkbox" name="times[]" value="Weekday mornings"> Weekday mornings</label><label class="check"><input type="checkbox" name="times[]" value="Weekday afternoons"> Weekday afternoons</label><label class="check"><input type="checkbox" name="times[]" value="After school"> After school</label><label class="check"><input type="checkbox" name="times[]" value="Saturdays"> Saturdays</label></div></fieldset>
-    <div class="field full"><label for="client-enquiry-preferences">Anything that would make first contact easier?</label><span class="hint" id="client-enquiry-preferences-hint">For example: text before calling, best time to call, or communication preferences.</span><textarea id="client-enquiry-preferences" name="preferences" rows="4" aria-describedby="client-enquiry-preferences-hint"></textarea></div>
-    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> I agree to Blossom contacting me about this enquiry. <span class="req" aria-hidden="true">*</span></label></div>
-  </div>
-  <p class="fine form-note">Please don't include medical details here. We'll talk about those with you directly. See our <a href="/privacy/">privacy policy</a>.</p>
-  <button class="btn" type="submit">Send enquiry</button>
-</form>
-    </div>
-    <div class="panel" role="tabpanel" id="panel-carer" aria-labelledby="tab-carer" hidden>
-      <h3>Tell us about the person you support</h3>
-      <p>Your details, their details, and what support would help.</p>
-      <!-- HALAXY EMBED (later): the Halaxy carer intake form can replace this form -->
-      <form class="enquiry" name="carer-enquiry" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website">
-  <input type="hidden" name="form-name" value="carer-enquiry">
-  <input type="hidden" name="subject" value="New parent or carer enquiry">
-  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
-  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
-  <div class="fields">
-    <div class="field"><label for="carer-enquiry-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-name" name="name" type="text" autocomplete="name" required></div>
-    <div class="field"><label for="carer-enquiry-relationship">Your relationship to the client <span class="req" aria-hidden="true">*</span></label><span class="hint" id="carer-enquiry-relationship-hint">For example: parent, carer, support coordinator.</span><input id="carer-enquiry-relationship" name="relationship" type="text" required aria-describedby="carer-enquiry-relationship-hint"></div>
-    <div class="field"><label for="carer-enquiry-phone">Phone <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-phone" name="phone" type="tel" autocomplete="tel" required></div>
-    <div class="field"><label for="carer-enquiry-email">Email <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-email" name="email" type="email" autocomplete="email" required></div>
-    <div class="field"><label for="carer-enquiry-client-name">Client's first name <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-client-name" name="client-name" type="text" required></div>
-    <div class="field"><label for="carer-enquiry-client-age">Client's age</label><input id="carer-enquiry-client-age" name="client-age" type="text"></div>
-    <div class="field"><label for="carer-enquiry-suburb">Client's suburb <span class="req" aria-hidden="true">*</span></label><input id="carer-enquiry-suburb" name="suburb" type="text" required></div>
-    <div class="field"><label for="carer-enquiry-service">Service you're interested in <span class="req" aria-hidden="true">*</span></label><select id="carer-enquiry-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
-    <div class="field"><label for="carer-enquiry-delivery">Home visit or telehealth? <span class="req" aria-hidden="true">*</span></label><select id="carer-enquiry-delivery" name="delivery" required><option value="">Choose one</option><option>Home visit</option><option>Telehealth</option><option>Either</option></select></div>
-    <div class="field"><label for="carer-enquiry-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="carer-enquiry-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
-    <fieldset class="field full"><legend>Times that usually suit</legend><div class="checks"><label class="check"><input type="checkbox" name="times[]" value="Weekday mornings"> Weekday mornings</label><label class="check"><input type="checkbox" name="times[]" value="Weekday afternoons"> Weekday afternoons</label><label class="check"><input type="checkbox" name="times[]" value="After school"> After school</label><label class="check"><input type="checkbox" name="times[]" value="Saturdays"> Saturdays</label></div></fieldset>
-    <div class="field full"><label for="carer-enquiry-preferences">Anything that would make first contact easier?</label><span class="hint" id="carer-enquiry-preferences-hint">For example: who to contact first, communication or sensory preferences.</span><textarea id="carer-enquiry-preferences" name="preferences" rows="4" aria-describedby="carer-enquiry-preferences-hint"></textarea></div>
-    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> I agree to Blossom contacting me about this enquiry, and I have the client's permission to make it. <span class="req" aria-hidden="true">*</span></label></div>
-  </div>
-  <p class="fine form-note">Please don't include medical details here. We'll talk about those with you directly. See our <a href="/privacy/">privacy policy</a>.</p>
-  <button class="btn" type="submit">Send enquiry</button>
-</form>
-    </div>
-    <div class="panel" role="tabpanel" id="panel-referrer" aria-labelledby="tab-referrer" hidden>
-      <h3>Refer a client</h3>
-      <p>Send us the referral and we'll contact your client directly.</p>
-      <!-- HALAXY EMBED (later): the Halaxy referrer form can replace this form -->
-      <form class="enquiry" name="referral" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company-website" enctype="multipart/form-data">
-  <input type="hidden" name="form-name" value="referral">
-  <input type="hidden" name="subject" value="New referral">
-  <p class="hp"><label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
-  <p class="fine">Fields marked <span class="req">*</span> are required.</p>
-  <div class="fields">
-    <div class="field"><label for="referral-referrer-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="referral-referrer-name" name="referrer-name" type="text" autocomplete="name" required></div>
-    <div class="field"><label for="referral-referrer-role">Role and practice <span class="req" aria-hidden="true">*</span></label><span class="hint" id="referral-referrer-role-hint">For example: GP, Smith Street Medical.</span><input id="referral-referrer-role" name="referrer-role" type="text" required aria-describedby="referral-referrer-role-hint"></div>
-    <div class="field"><label for="referral-referrer-phone">Your phone</label><input id="referral-referrer-phone" name="referrer-phone" type="tel" autocomplete="tel"></div>
-    <div class="field"><label for="referral-referrer-email">Your email <span class="req" aria-hidden="true">*</span></label><input id="referral-referrer-email" name="referrer-email" type="email" autocomplete="email" required></div>
-    <div class="field"><label for="referral-client-name">Client's full name <span class="req" aria-hidden="true">*</span></label><input id="referral-client-name" name="client-name" type="text" required></div>
-    <div class="field"><label for="referral-client-dob">Client's date of birth</label><input id="referral-client-dob" name="client-dob" type="date"></div>
-    <div class="field"><label for="referral-client-phone">Client's (or carer's) phone <span class="req" aria-hidden="true">*</span></label><input id="referral-client-phone" name="client-phone" type="tel" required></div>
-    <div class="field"><label for="referral-suburb">Client's suburb <span class="req" aria-hidden="true">*</span></label><input id="referral-suburb" name="suburb" type="text" required></div>
-    <div class="field"><label for="referral-service">Service <span class="req" aria-hidden="true">*</span></label><select id="referral-service" name="service" required><option value="">Choose one</option><option>Exercise physiology</option><option>Physiotherapy</option><option>Disability support work</option><option>Not sure yet</option></select></div>
-    <div class="field"><label for="referral-funding">Funding <span class="req" aria-hidden="true">*</span></label><select id="referral-funding" name="funding" required><option value="">Choose one</option><option>NDIS: plan managed</option><option>NDIS: self managed</option><option>NDIS: agency managed</option><option>Private</option><option>Medicare (GP care plan)</option><option>Other or not sure</option></select></div>
-    <div class="field full"><label for="referral-letter">Referral letter (optional)</label><span class="hint" id="referral-letter-hint">PDF or image, up to 8 MB. You can also email it to hello@blossomtherapy.au.</span><input id="referral-letter" name="referral-letter" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" aria-describedby="referral-letter-hint"></div>
-    <div class="field full"><label class="check"><input type="checkbox" name="consent" value="yes" required> The client (or their carer) has agreed to this referral. <span class="req" aria-hidden="true">*</span></label></div>
-  </div>
-  <p class="fine form-note">We'll contact your client directly. Clinical details are best included in the referral letter. See our <a href="/privacy/">privacy policy</a>.</p>
-  <button class="btn" type="submit">Send referral</button>
-</form>
-      <p class="fine" style="margin-top:14px">Prefer paper? <a href="https://img1.wsimg.com/blobby/go/fc922215-55f7-48fb-bc5a-a0bc6ec97e0e/Client%20referral%20form.pdf">Download the referral form (PDF)</a> and email it to <a href="mailto:hello@blossomtherapy.au">hello@blossomtherapy.au</a>.</p>
+    <div class="path-grid">
+      <a class="path-card" href="/book/#client"><span class="path-title">I'm booking for myself</span><span>Exercise physiology, physiotherapy or support work for you.</span></a>
+      <a class="path-card" href="/book/#carer"><span class="path-title">I'm a parent or carer</span><span>Book for someone you support.</span></a>
+      <a class="path-card" href="/book/#referrer"><span class="path-title">I'm a GP or referrer</span><span>Refer a client and we'll contact them directly.</span></a>
     </div>
   </div>
 </section>
@@ -222,6 +141,15 @@
   </div>
 </section>
 
+<section class="sec insta" id="instagram" aria-labelledby="ig-h">
+  <div class="wrap">
+    <h2 id="ig-h">Follow along on Instagram</h2>
+    <p class="lead"><a href="https://www.instagram.com/blossomtherapyandsupports/" rel="noopener">@blossomtherapyandsupports</a></p>
+    <div class="insta-grid" data-insta><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Df82sSqk13b/" data-instgrm-version="14"><a href="https://www.instagram.com/p/Df82sSqk13b/" rel="noopener">View this post on Instagram</a></blockquote><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DfRpUbYSjM1/" data-instgrm-version="14"><a href="https://www.instagram.com/p/DfRpUbYSjM1/" rel="noopener">View this post on Instagram</a></blockquote><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DfTMzJsSl2b/" data-instgrm-version="14"><a href="https://www.instagram.com/p/DfTMzJsSl2b/" rel="noopener">View this post on Instagram</a></blockquote></div>
+    <p class="center"><a class="btn" href="https://www.instagram.com/blossomtherapyandsupports/" rel="noopener">Follow us on Instagram</a></p>
+  </div>
+</section>
+
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -232,7 +160,7 @@
     <p class="name">Blossom Therapy and Supports</p>
     <p>Gold Coast QLD, Australia &middot; <a href="mailto:hello@blossomtherapy.au">hello@blossomtherapy.au</a></p>
     <ul class="footer-links">
-      <li><a href="/#get-started">Get started</a></li>
+      <li><a href="/book/">Book now</a></li>
       <li><a href="/referrals/">Referrals</a></li>
       <li><a href="/privacy/">Privacy policy</a></li>
       <li><a href="/accessibility/">Accessibility</a></li>
