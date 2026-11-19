@@ -1,26 +1,33 @@
 # Blossom Therapy & Supports website
 
-A static site (plain HTML/CSS) that's ready for Netlify. It doesn't need a build step.
+A static site hosted on Netlify. Every push to `main` deploys automatically.
 
-## Deploy (Netlify free)
-1. Create a Netlify account using the business email, not a personal one.
-2. Go to Sites > Add new site > Deploy manually, then drag this whole folder in.
-3. Check the free *.netlify.app preview URL on a phone.
-4. When it's approved: Domain management > add blossomtherapyandsupport.com.au, then follow Netlify's DNS steps at the registrar. **Don't change MX (email) records.**
+- `site/` is the published website (Netlify serves only this folder; see `netlify.toml`)
+- `tools/build.py` generates the pages. Edit the text there, run `python3 tools/build.py`, and commit.
+- `tools/assets.py` lists every image and PDF from the old GoDaddy site
 
-## Search the files for these markers
-- `HALAXY EMBED` — paste the Halaxy form embed code here, then delete the fallback email button. There are 5 of these:
-  - Home picker: Client intake
-  - Home picker: Carer intake
-  - Home picker: Referrer form
-  - Services page: Group waitlist
-  - Referrals page: Referrer form
-- `CONFIRM` — facts to check before launch
-- `TODO` — waiting on photos, bios or information
-- `LATER` — where the online booking link goes when booking is switched on
+## Photos and files: how to get them in
 
-## Before cancelling GoDaddy
-The referral PDF and the 4 resource PDFs are still linked from GoDaddy's servers. Download them into `assets/files/` and update the links first, or they'll break when GoDaddy is cancelled.
+**Option 1: GitHub website (no software needed)**
+1. Open github.com/cjwalks/blossomtherapy-website, go into `site/assets/img/`, then **Add file > Upload files**.
+2. Drag the photos in, then click **Commit changes**.
+3. Tell Claude what each photo is (or name them as below). Claude rebuilds the pages to use them.
 
-## Editing
-Edit the HTML files directly, then drag the folder into Netlify again to redeploy. Each deploy uses 15 of the 300 free monthly credits, so batch your changes.
+**Option 2: send them in chat.** Attach the photos to a Claude message. Claude adds them and pushes.
+
+### Naming
+- Keep the old file names for photos already on the site (list in `tools/assets.py`, e.g. `IMG_8918.jpeg` = Emma). The site switches to the local copy automatically.
+- New photos: `caite.jpg` (team photo), `physio.jpg` (services), `wattle-calendar.png`, `banksia-calendar.png` (current term).
+- Size: anything up to 2–3 MB is fine. Landscape for services, square or portrait for team photos.
+
+### Before GoDaddy is cancelled
+Until a file is uploaded here, the site loads it from GoDaddy's servers, and those links die when GoDaddy is cancelled. Upload all 21 images and 5 PDFs from `tools/assets.py` first. PDFs go in `site/assets/files/` with the names listed there.
+
+## Markers in the HTML
+- `HALAXY EMBED`: paste the Halaxy form embed code (5 spots)
+- `CONFIRM`: facts to check
+- `TODO`: waiting on photos or information
+- `LATER`: where the online-booking link goes when booking is switched on
+
+## Netlify credits
+Each production deploy uses 15 of 300 free monthly credits, so batch your changes (about 20 deploys a month).
