@@ -1,0 +1,4 @@
+# Old GoDaddy URLs -> new pages (301 = permanent, keeps Google rankings)
+# Other old URLs (/about-us, /referrals etc.) already match the new folders.
+/pricing-%26-funding   /pricing-and-funding/   301
+/pricing-&-funding     /pricing-and-funding/   301
